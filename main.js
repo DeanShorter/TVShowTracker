@@ -77,11 +77,11 @@ function fetchShows(){
                 '</span>' + 
                 '</p>' + 
                 '<p class="show-season"><span class="title-style">Season: </span>' + 
-                '<input type="number" class="updated-season update-field" value='+season+'>' +
+                '<input type="number" min="1" id="' + name + '" onchange="seasonUpdated(this)" class="updated-season update-field" value='+season+'>' +
 //                season +
                 '</p>' +
                 '<p class="show-episode"><span class="title-style">Episode: </span>' + 
-                '<input type="number" class="updated-episode update-field" value='+episode+'>' +
+                '<input type="number" min="1" id="' + name + '" onchange="episodeUpdated(this)" class="updated-episode update-field" value='+episode+'>' +
 //                episode + 
                 '</p>' +
                 '<div class="new-buttons">'+
@@ -91,10 +91,32 @@ function fetchShows(){
                 '</div>';
         } 
         
-        
-
     }
              
+}
+
+function seasonUpdated(e){
+    shows = JSON.parse(localStorage.getItem("shows"))
+    for (var i = 0; i < shows.length; i++)
+    {
+        if(shows[i].name == e.id){
+                shows[i].season = e.value;
+                break;
+            }
+    }
+    localStorage.setItem("shows",JSON.stringify(shows));
+}
+
+function episodeUpdated(e){
+    shows = JSON.parse(localStorage.getItem("shows"))
+    for (var i = 0; i < shows.length; i++)
+    {
+        if(shows[i].name == e.id){
+                shows[i].episode = e.value;
+                break;
+            }
+    }
+    localStorage.setItem("shows",JSON.stringify(shows));
 }
 
 
