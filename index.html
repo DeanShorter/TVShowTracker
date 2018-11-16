@@ -15,40 +15,43 @@
         <div class="content">   
              
             <div class="header">
-                <h1 class="heading"><span class="tv">TV</span>Tracker <span class="fas fa-plus-square"></span></h1>    
-                <input class="input-field search-bar" type="search" placeholder="Search for a show...">
+                <h1 class="heading"  onClick="window.location.reload()"><span class="tv">TV</span>Tracker <span class="fas fa-plus-square"></span></h1> 
+                
+                <div class="header-right">
+                   <ul class="icons">
+                    <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+                </ul>
+                    <input class="input-field search-bar" type="search" placeholder="Search for a show...">
+                    
+                </div>
             </div>
             
             
             <div class="add-to-list">
                 <form class="entry-form">
-                    <input class="input-field name-of-show" type="text" name="Name" placeholder="Enter the name of the show...">
+                    <input class="input-field name-of-show" type="text" name="Name" placeholder="Enter the name of the show..." autocomplete="off">
                     <input class="input-field season-number" type="number" min='1' name="Season" placeholder="Enter season number...">
                     <input class="input-field episode-number" type="number" min='1' name="Episode" placeholder="Enter episode number...">
-                    <input class="input-field site-url" type="text" name="URL" placeholder="Enter URL to episode...">
-                    <button class="add-button" type="submit">Add</button>
+                    <input class="input-field site-url" type="text" name="URL" placeholder="Enter URL to episode..." autocomplete="off">
+                    <button class="add-button" type="submit">+</button>
                 </form>
             </div>
-
-
+            
+            
+           
             <div class="show-list">
-                
-                            
-            </div>
-            
-            
-            
-            
-
-            
-            
-            
-
-        </div>  
-        
-        
-        
+            </div>            
+            <div class="red-line"></div>
+        </div> 
+        <footer>
+                <div class="footer">
+                    <p class="copy">&copy; 2018 TVTracker. All rights reserved.</p>
+                </div>
+        </footer>
     </div>
+
     
     
     <script src="main.js"></script>

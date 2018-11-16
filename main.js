@@ -1,6 +1,6 @@
 let addButton = document.querySelector('.add-button');
-
-
+let filter = document.querySelector('.search-bar');
+filter.addEventListener('keyup',fetchShows);
 addButton.addEventListener('click', submitShow);
 
 
@@ -22,13 +22,14 @@ function submitShow(e){
         url: url        
     }
     
+    
     if (localStorage.getItem('shows') === null) {
         let shows = [];
         shows.push(savedShow);
         localStorage.setItem('shows', JSON.stringify(shows));
     } else {
         let shows = JSON.parse(localStorage.getItem('shows'));
-        shows.push(savedShow);
+        shows.unshift(savedShow);
         localStorage.setItem('shows', JSON.stringify(shows));
     }
     
@@ -52,42 +53,52 @@ function removeShow(url) {
     
 }
 
-
-
 function fetchShows(){
-    
     let shows = JSON.parse(localStorage.getItem('shows'));
-    let showList = document.querySelector('.show-list');
-    
+    let showList = document.querySelector('.show-list');    
     showList.innerHTML = '';
 
+    let targetString = filter.value;
+    
     for (let i = 0; i < shows.length; i++) {
         let name = shows[i].name;
         let season = shows[i].season;
         let episode = shows[i].episode;
         let url = shows[i].url;
-        showList.style.visibility = "visible";
-        showList.innerHTML += 
-            
-            
-            '<div class="show-item">' +
-            '<p class="show-name">' +
-            name +
-            '</p>' + 
-            '<p class="show-season">' +
-            season +
-            '</p>' +
-            '<p class="show-episode">' +
-            episode + 
-            '</p>' +
-            ' <a class="watch-ep-btn" target="_blank" href="' + url + '">Watch Episode</a> ' +
-            ' <a class="remove-btn" onclick="removeShow(\'' + url + '\')" href="#">Remove</a> ' +
-            '</div>';
+        showList.style.display = "block";
         
+        if (name.startsWith(targetString)){
+            
+            showList.innerHTML +=                       
+                '<div class="show-item">' +
+                '<p class="show-name">' +
+                '<span class="show-data">' +
+                name +
+                '</span>' + 
+                '</p>' + 
+                '<p class="show-season"><span class="title-style">Season: </span>' + 
+                '<input type="number" class="updated-season update-field" value='+season+'>' +
+//                season +
+                '</p>' +
+                '<p class="show-episode"><span class="title-style">Episode: </span>' + 
+                '<input type="number" class="updated-episode update-field" value='+episode+'>' +
+//                episode + 
+                '</p>' +
+                '<div class="new-buttons">'+
+                ' <a class="watch-ep-btn btn" target="_blank" href="' + url + '"><span>Watch Episode</span></a> ' +
+                ' <a class="remove-btn btn" onclick="removeShow(\'' + url + '\')" href="#"><span>Remove</span></a> ' +
+                '</div>' +
+                '</div>';
+        } 
+        
+        
+
     }
- 
+             
 }
 
+
+// Form validation
 function validateForm(nameOfShow, seasonNumber, epNumber, url) {
     if (!nameOfShow || !seasonNumber || !epNumber || !url) {
         alert("Please fill in the form.");
